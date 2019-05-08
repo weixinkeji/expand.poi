@@ -18,6 +18,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class JWEOfficeR {
 	private Workbook wb;
+	/**
+	 * 构造方法
+	 * @param fis InputStream 输入流
+	 * @param xls_xlsx JWEOfficeEnum  元素 指明是xlx还是xlsx格式
+	 * @throws IOException io流异常
+	 */
 	public JWEOfficeR(InputStream fis,JWEOfficeEnum xls_xlsx) throws IOException{
 		ZipSecureFile.setMinInflateRatio(-1.0d);
 		this.wb = xls_xlsx==JWEOfficeEnum.xls?
@@ -25,6 +31,13 @@ public class JWEOfficeR {
 				:new XSSFWorkbook(fis)
 				;
 	}
+	
+	/**
+	 * 构造方法
+	 * @param filePath String 文件路径
+	 * @param xls_xlsx JWEOfficeEnum  元素 指明是xlx还是xlsx格式
+	 * @throws IOException io流异常
+	 */
 	public JWEOfficeR(String filePath,JWEOfficeEnum xls_xlsx) throws IOException{
 		InputStream fis = null;
 		try {
@@ -48,8 +61,8 @@ public class JWEOfficeR {
 	 * @param <T> 相关的特征类
 	 * @param c   相关的特征类
 	 * @param sheetName excel工作表名称
-	 * @return		List
-	 * @throws Exception
+	 * @return		List 集合
+	 * @throws Exception 异常
 	 */
 	public <T>List<T> readExcel(Class<T> c,String sheetName) throws Exception {
 		R_PoiOffice<T> robj=new R_PoiOffice<T>(c);
@@ -77,8 +90,8 @@ public class JWEOfficeR {
 	 * @param c   相关的特征类
 	 * @param sheetName excel工作表名称
 	 * @param filePath excel文档的路径
-	 * @return List
-	 * @throws Exception
+	 * @return List 集合
+	 * @throws Exception 异常
 	 */
 	public static <T>List<T> readExcel_xls(Class<T> c,String sheetName, String filePath) throws Exception {
 		InputStream fis = null;
@@ -100,8 +113,8 @@ public class JWEOfficeR {
 	 * @param c   相关的特征类
 	 * @param sheetName excel工作表名称
 	 * @param fis	输入流
-	 * @return		List
-	 * @throws Exception
+	 * @return		List 集合
+	 * @throws Exception 异常
 	 */
 	public static <T>List<T> readExcel_xls(Class<T> c,String sheetName, InputStream fis) throws Exception {
 		R_PoiOffice<T> robj=new R_PoiOffice<T>(c);
@@ -132,8 +145,8 @@ public class JWEOfficeR {
 	 * @param c   相关的特征类
 	 * @param sheetName excel工作表名称
 	 * @param filePath excel文档的路径
-	 * @return List
-	 * @throws Exception
+	 * @return List 集合
+	 * @throws Exception 异常
 	 */
 	public static <T>List<T> readExcel_xlsx(Class<T> c,String sheetName, String filePath) throws Exception {
 		InputStream fis = null;
@@ -156,7 +169,7 @@ public class JWEOfficeR {
 	 * @param sheetName excel工作表名称
 	 * @param fis	输入流
 	 * @return		List
-	 * @throws Exception
+	 * @throws Exception 异常
 	 */
 	public static <T>List<T> readExcel_xlsx(Class<T> c,String sheetName, InputStream fis) throws Exception {
 		R_PoiOffice<T> robj=new R_PoiOffice<T>(c);

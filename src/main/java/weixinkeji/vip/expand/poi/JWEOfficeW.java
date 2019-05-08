@@ -33,8 +33,8 @@ public class JWEOfficeW {
 	}
 	
 	/**
-	 * 
-	 * @throws IOException
+	 * 写出文档，与自动关闭输出流
+	 * @throws IOException io流异常
 	 */
 	public void writeAndAutoCloseIO() throws IOException {
 		try {
@@ -53,11 +53,10 @@ public class JWEOfficeW {
 	
 	/**
 	 * 将集合中的数据，通过输出流，写到excel文档中
-	 * @param stream 输出流
 	 * @param tablename excel工作表名称
 	 * @param list 数据集合
-	 * @return boolean
-	 * @throws Exception 
+	 * @return boolean  真假
+	 * @throws Exception  异常
 	 */
 	public boolean addToExcel(String tablename, List<?> list) throws Exception {
 		if (null == list || list.isEmpty()) {
@@ -95,7 +94,7 @@ public class JWEOfficeW {
 	 * @param filePath excel文档的路径
 	 * @param tablename excel工作表名称
 	 * @param list 数据集合
-	 * @return boolean
+	 * @return boolean 真假
 	 */
 	public static boolean writeToExcel_xls(String filePath, String tablename, List<?> list) {
 		OutputStream stream = null;
@@ -120,7 +119,7 @@ public class JWEOfficeW {
 	 * @param stream 输出流
 	 * @param tablename excel工作表名称
 	 * @param list 数据集合
-	 * @return boolean
+	 * @return boolean 真假
 	 */
 	public static boolean writeToExcel_xls(OutputStream stream, String tablename, List<?> list) {
 		if (null == list || list.isEmpty()) {

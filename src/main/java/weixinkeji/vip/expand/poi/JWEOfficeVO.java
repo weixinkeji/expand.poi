@@ -22,7 +22,7 @@ public class JWEOfficeVO {
 	 * 
 	 * @param c 目标类
 	 * @return JWEOfficeVO[] 对象数组
-	 * @throws Exception
+	 * @throws Exception 异常
 	 */
 	synchronized public static JWEOfficeVO[] getJWEOfficeVO(Class<?> c) throws Exception {
 		JWEOfficeVO[] vo = map.get(c);
@@ -32,6 +32,12 @@ public class JWEOfficeVO {
 		}
 		return vo;
 	}
+	/**
+	 * 利用反射，给对象附值
+	 * @param obj 对象
+	 * @param value 值
+	 * @throws Exception 异常
+	 */
 	public void setValue(Object obj,Object value) throws Exception{
 		if(null==value) {
 			return;
