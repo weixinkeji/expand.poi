@@ -9,50 +9,50 @@
 	<packaging>jar</packaging>
 
 	<name>expand.poi</name>
- <description>
+	<description>
   	expand.poi框架，是一款基poi技术上的简化使用的工具jar包。真正做到一键导出与一键导入
   </description>
-  <url>https://github.com/weixinkeji/expand.poi</url>
-  <properties>
-	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<maven.compiler.source>1.8</maven.compiler.source>
-	<maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
-  <licenses>
-  	<license>
-		<name>The Apache Software License, Version 2.0</name>
-		<url>http://apache.org/licenses/LICENSE-2.0.txt</url>
-  	</license>
-  </licenses>
+	<url>https://github.com/weixinkeji/expand.poi</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
 	<developers>
-	    <developer>
-	        <name>wangchunzi</name>
-	        <email>pankeng1988w@aliyun.com</email>
-	        <organization>wangchunzi</organization>
-	        <url>https://github.com/weixinkeji/expand.poi</url>
-	        <roles>
-	            <role>developer</role>
-	        </roles>
-	        <timezone>+8</timezone>
-	    </developer>
+		<developer>
+			<name>wangchunzi</name>
+			<email>pankeng1988w@aliyun.com</email>
+			<organization>wangchunzi</organization>
+			<url>https://github.com/weixinkeji/expand.poi</url>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
 	</developers>
 	<scm>
-	    <connection>scm:git:https://github.com/weixinkeji/expand.poi.git</connection>
-	    <developerConnection>scm:git:https://github.com/weixinkeji/expand.poi.git</developerConnection>
-	    <url>https://github.com/weixinkeji/expand.poi</url>
-	    <tag>v${project.version}</tag>
+		<connection>scm:git:https://github.com/weixinkeji/expand.poi.git</connection>
+		<developerConnection>scm:git:https://github.com/weixinkeji/expand.poi.git</developerConnection>
+		<url>https://github.com/weixinkeji/expand.poi</url>
+		<tag>v${project.version}</tag>
 	</scm>
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <name>Maven Central Staging Repository</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-        </repository>
-    </distributionManagement>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<name>Maven Central Staging Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
 
 	<dependencies>
 		<!-- xls -->
@@ -64,22 +64,29 @@
 		</dependency>
 		<!-- xlsx读写 -->
 		<dependency>
-		    <groupId>org.apache.poi</groupId>
-		    <artifactId>poi-ooxml</artifactId>
-		    <version>4.1.0</version>
-		    <scope>provided</scope>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>4.1.0</version>
+			<scope>provided</scope>
 		</dependency>
 		<!-- xlsx依赖需要 -->
 		<dependency>
-		    <groupId>org.dom4j</groupId>
-		    <artifactId>dom4j</artifactId>
-		    <version>2.1.1</version>
-		    <scope>provided</scope>
+			<groupId>org.dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>2.1.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
-      <plugins>
+		<plugins>
 			<!-- Sources Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -123,5 +130,5 @@
 				</executions>
 			</plugin>
 		</plugins>
-    </build>
+	</build>
 </project>

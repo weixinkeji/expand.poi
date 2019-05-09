@@ -31,7 +31,13 @@ public class JWEOfficeR {
 				:new XSSFWorkbook(fis)
 				;
 	}
-	
+	/**
+	 * 取得 Workbook 接口的实例。
+	 * @return Workbook
+	 */
+	public Workbook getWorkbook() {
+		return this.wb;
+	}
 	/**
 	 * 构造方法
 	 * @param filePath String 文件路径
@@ -67,6 +73,33 @@ public class JWEOfficeR {
 	public <T>List<T> readExcel(Class<T> c,String sheetName) throws Exception {
 		R_PoiOffice<T> robj=new R_PoiOffice<T>(c);
 			Sheet sheet = this.wb.getSheet(sheetName);
+			int rows = sheet.getPhysicalNumberOfRows();
+			if(rows<1) {
+				return null;
+			}
+			List<T> list=new ArrayList<>();
+			robj.init_cellMapJWEOfficeVO(sheet.getRow(0));
+			
+			for (int r =1; r < rows; r++) {
+				Row row = sheet.getRow(r);
+				if (row == null) {
+					continue;
+				}
+				list.add(robj.readRow(row));
+			}
+			return list;
+	}
+	/**
+	 * 通过输入流，读取excel文档的内容 到 集合中
+	 * @param <T> 相关的特征类
+	 * @param c   相关的特征类
+	 * @param sheetIndex 第几个excel工作表
+	 * @return		List 集合
+	 * @throws Exception 异常
+	 */
+	public <T>List<T> readExcel(Class<T> c,int sheetIndex) throws Exception {
+		R_PoiOffice<T> robj=new R_PoiOffice<T>(c);
+			Sheet sheet = this.wb.getSheetAt(sheetIndex);
 			int rows = sheet.getPhysicalNumberOfRows();
 			if(rows<1) {
 				return null;

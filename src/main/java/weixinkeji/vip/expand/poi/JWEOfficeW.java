@@ -26,6 +26,14 @@ public class JWEOfficeW {
 		this.wb = xls_xlsx==JWEOfficeEnum.xls?new HSSFWorkbook():new XSSFWorkbook();
 		stream = new FileOutputStream(filePath);
 	}
+	/**
+	 * 取得 Workbook 接口的实例。
+	 * @return Workbook
+	 */
+	public Workbook getWorkbook() {
+		return this.wb;
+	}
+	
 	public void write() throws IOException {
 		if(null!=this.wb) {
 			this.wb.write(this.stream);
@@ -86,9 +94,45 @@ public class JWEOfficeW {
 			row = sheet.createRow(j++);
 			W_PoiOffice.setData(wb, row, vos, list.get(i));
 		}
-		return false;
+		return true;
 	}
-	
+	/**
+	 * 将集合中的数据，通过输出流，写到excel文档中
+	 * @param sheetIndex 第几个excel工作表 （程序组装： "sheet"+sheetIndex ）
+	 * @param list 数据集合
+	 * @return boolean  真假
+	 * @throws Exception  异常
+	 */
+	public boolean addToExcel(int sheetIndex, List<?> list) throws Exception {
+		if (null == list || list.isEmpty()) {
+			return false;
+		}
+		if(list.isEmpty()) {
+			return false;
+		}
+		Class<?> c = list.get(0).getClass();
+		JWEOfficeVO[] vos=null;
+		try {
+			vos = JWEOfficeVO.getJWEOfficeVO(c);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			return false;
+		}
+		// 创建一张表格
+		Sheet sheet = wb.createSheet("sheet"+sheetIndex);
+		// 创建第1行
+		Row row = sheet.createRow(0);
+		// 设置第1行的数据
+		W_PoiOffice.setTitle(row, vos);
+		
+		// 第二行开始，填充数据
+		int j = 1;
+		for (int i = 0; i < list.size(); i++) {
+			row = sheet.createRow(j++);
+			W_PoiOffice.setData(wb, row, vos, list.get(i));
+		}
+		return true;
+	}
 	/**
 	 * 将集合中的数据，写到excel文档中
 	 * @param filePath excel文档的路径
