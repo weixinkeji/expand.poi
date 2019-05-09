@@ -140,6 +140,30 @@ public class JWEOfficeR {
 		}
 	}
 	
+
+	 /**
+	  * 读取excel文档的内容 到 集合中
+	 * @param <T> 相关的特征类
+	 * @param c   相关的特征类
+	 * @param sheetIndex 第几个excel工作表
+	 * @param filePath excel文档的路径
+	 * @return List 集合
+	 * @throws Exception 异常
+	 */
+	public static <T>List<T> readExcel_xls(Class<T> c,int sheetIndex, String filePath) throws Exception {
+		InputStream fis = null;
+		try {
+			fis=new FileInputStream(filePath);
+			return readExcel_xls(c,sheetIndex, fis);
+		}catch (Exception e) {
+			throw e;
+		}finally {
+			if(null!=fis) {
+				fis.close();
+			}
+		}
+	}
+	 
 	/**
 	 * 通过输入流，读取excel文档的内容 到 集合中
 	 * @param <T> 相关的特征类
@@ -171,7 +195,38 @@ public class JWEOfficeR {
 			return list;
 		}
 	}
-
+	/**
+	 * 通过输入流，读取excel文档的内容 到 集合中
+	 * @param <T> 相关的特征类
+	 * @param c   相关的特征类
+	 * @param sheetIndex 第几个excel工作表
+	 * @param fis	输入流
+	 * @return		List 集合
+	 * @throws Exception 异常
+	 */
+	public static <T>List<T> readExcel_xls(Class<T> c,int sheetIndex, InputStream fis) throws Exception {
+		R_PoiOffice<T> robj=new R_PoiOffice<T>(c);
+		ZipSecureFile.setMinInflateRatio(-1.0d);
+		try (HSSFWorkbook wb = new HSSFWorkbook(fis)) {
+			HSSFSheet sheet = wb.getSheetAt(sheetIndex);
+			int rows = sheet.getPhysicalNumberOfRows();
+			if(rows<1) {
+				return null;
+			}
+			List<T> list=new ArrayList<>();
+			robj.init_cellMapJWEOfficeVO(sheet.getRow(0));
+			
+			for (int r =1; r < rows; r++) {
+				HSSFRow row = sheet.getRow(r);
+				if (row == null) {
+					continue;
+				}
+				list.add(robj.readRow(row));
+			}
+			return list;
+		}
+	}
+	
 	 /**
 	  * 读取excel文档的内容 到 集合中
 	 * @param <T> 相关的特征类
@@ -194,7 +249,28 @@ public class JWEOfficeR {
 			}
 		}
 	}
-	
+	/**
+	  * 读取excel文档的内容 到 集合中
+	 * @param <T> 相关的特征类
+	 * @param c   相关的特征类
+	 * @param sheetIndex 第几个excel工作表
+	 * @param filePath excel文档的路径
+	 * @return List 集合
+	 * @throws Exception 异常
+	 */
+	public static <T>List<T> readExcel_xlsx(Class<T> c,int sheetIndex, String filePath) throws Exception {
+		InputStream fis = null;
+		try {
+			fis=new FileInputStream(filePath);
+			return readExcel_xlsx(c,sheetIndex, fis);
+		}catch (Exception e) {
+			throw e;
+		}finally {
+			if(null!=fis) {
+				fis.close();
+			}
+		}
+	}
 	/**
 	 * 通过输入流，读取excel文档的内容 到 集合中
 	 * @param <T> 相关的特征类
@@ -209,6 +285,37 @@ public class JWEOfficeR {
 		ZipSecureFile.setMinInflateRatio(-1.0d);
 		try (XSSFWorkbook wb = new XSSFWorkbook(fis)) {
 			XSSFSheet sheet = wb.getSheet(sheetName);
+			int rows = sheet.getPhysicalNumberOfRows();
+			if(rows<1) {
+				return null;
+			}
+			List<T> list=new ArrayList<>();
+			robj.init_cellMapJWEOfficeVO(sheet.getRow(0));
+			
+			for (int r =1; r < rows; r++) {
+				Row row = sheet.getRow(r);
+				if (row == null) {
+					continue;
+				}
+				list.add(robj.readRow(row));
+			}
+			return list;
+		}
+	}
+	/**
+	 * 通过输入流，读取excel文档的内容 到 集合中
+	 * @param <T> 相关的特征类
+	 * @param c   相关的特征类
+	 * @param sheetIndex 第几个excel工作表
+	 * @param fis	输入流
+	 * @return		List
+	 * @throws Exception 异常
+	 */
+	public static <T>List<T> readExcel_xlsx(Class<T> c,int sheetIndex, InputStream fis) throws Exception {
+		R_PoiOffice<T> robj=new R_PoiOffice<T>(c);
+		ZipSecureFile.setMinInflateRatio(-1.0d);
+		try (XSSFWorkbook wb = new XSSFWorkbook(fis)) {
+			XSSFSheet sheet = wb.getSheetAt(sheetIndex);
 			int rows = sheet.getPhysicalNumberOfRows();
 			if(rows<1) {
 				return null;
