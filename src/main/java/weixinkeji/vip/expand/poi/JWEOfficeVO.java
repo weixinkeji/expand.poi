@@ -45,7 +45,7 @@ public class JWEOfficeVO {
 		String str;
 		switch (this.valueType) {
 		case "String":
-			this.getField().set(obj, value);
+			this.getField().set(obj, value.toString());
 			return;
 		case "boolean":
 		case "Boolean":
