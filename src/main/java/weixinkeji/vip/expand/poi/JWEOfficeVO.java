@@ -388,7 +388,7 @@ class W_PoiOffice {
 	public static void setDate(Workbook wb, Cell cell, Date date, String dateFormat) {
 		CellStyle style = wb.createCellStyle();
 		style.setDataFormat(wb.getCreationHelper().createDataFormat().getFormat(dateFormat));
-		cell.setCellValue(new Date());
+		cell.setCellValue(date);
 		cell.setCellStyle(style);
 	}
 	
